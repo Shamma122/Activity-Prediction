@@ -31,10 +31,10 @@ def main():
     rfid_e = (lambda x: 3 if x=='Config 2 (3 Sensors)' else 4)(rfid)
 
     ant_ID = st.dropbox('Select the Antena ID',[1,2,3,4])
-    rssi = st.text_input('Enter the received signal strength indicator (RSSI)')
-    accv = st.text_input('Enter the vertical acceleration data from sensor')
-    accf = st.text_input('Enter the frontal acceleration data from sensor')
-    accl = st.text_input('Enter the lateral acceleration data from sensor')
+    rssi = st.number_input('Enter the received signal strength indicator (RSSI)')
+    accv = st.number_input('Enter the vertical acceleration data from sensor')
+    accf = st.number_input('Enter the frontal acceleration data from sensor')
+    accl = st.number_input('Enter the lateral acceleration data from sensor')
 
     inp_data = [accf,accv,accl,ant_ID,rssi,rfid_e]
 
@@ -45,3 +45,4 @@ def main():
 
 if __name__=='__main__':
     main()
+
