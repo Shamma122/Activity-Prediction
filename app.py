@@ -25,7 +25,7 @@ def main():
     st.title('ACTIVITY PREDICTION FROM SENSOR DATA')
     st.subheader('''This application will predict the on going avtivity of the basis of sensor data provided. Fill the respective 
     fields it will be predicted.''')
-    st.image('image.webp')
+    st.image('sensors.png')
 
     rfid = st.dropbox('Enter the RFID configuration settings',['Config 1 (4 Sensors)','Config 2 (3 Sensors)'])
     rfid_e = (lambda x: 3 if x=='Config 2 (3 Sensors)' else 4)(rfid)
@@ -45,4 +45,5 @@ def main():
 
 if __name__=='__main__':
     main()
+
 
