@@ -44,7 +44,8 @@ def main():
     accl = st.number_input('Enter lateral acceleration (accL)', format="%.2f")
 
     # Build numeric input list
-   inp_data = [
+   inp_data = 
+   [
     float(accf),       # Acc_f
     float(accv),       # Acc_v
     float(accl),       # Acc_l
@@ -59,5 +60,6 @@ def main():
 
 if __name__ == '__main__':
     main()
+
 
 
