@@ -1,3 +1,4 @@
+%%writefile app.py
 
 import streamlit as st
 import numpy as np
@@ -9,7 +10,7 @@ with open('final_model.joblib','rb') as file:
 
 def prediction(inp_list):
 
-    pred = model.predict(np.array([inp_list]))[0]
+    pred = model.predict([inp_list])[0]
     if pred==0:
         return 'Sitting on bed'
     elif pred==1:
@@ -27,14 +28,14 @@ def main():
     fields it will be predicted.''')
     st.image('sensors.png')
 
-    rfid = st.selectbox('Enter the RFID configuration settings',['Config 1 (4 Sensors)','Config 2 (3 Sensors)'])
+    rfid = st.dropbox('Enter the RFID configuration settings',['Config 1 (4 Sensors)','Config 2 (3 Sensors)'])
     rfid_e = (lambda x: 3 if x=='Config 2 (3 Sensors)' else 4)(rfid)
 
-    ant_ID = st.selectbox('Select the Antena ID',[1,2,3,4])
-    rssi = st.number_input('Enter the received signal strength indicator (RSSI)')
-    accv = st.number_input('Enter the vertical acceleration data from sensor')
-    accf = st.number_input('Enter the frontal acceleration data from sensor')
-    accl = st.number_input('Enter the lateral acceleration data from sensor')
+    ant_ID = st.dropbox('Select the Antena ID',[1,2,3,4])
+    rssi = st.text_input('Enter the received signal strength indicator (RSSI)')
+    accv = st.text_input('Enter the vertical acceleration data from sensor')
+    accf = st.text_input('Enter the frontal acceleration data from sensor')
+    accl = st.text_input('Enter the lateral acceleration data from sensor')
 
     inp_data = [accf,accv,accl,ant_ID,rssi,rfid_e]
 
@@ -45,7 +46,3 @@ def main():
 
 if __name__=='__main__':
     main()
-
-
-
-
