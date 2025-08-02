@@ -1,5 +1,3 @@
-
-
 %%writefile app.py
 
 import streamlit as st
@@ -48,4 +46,5 @@ def main():
 
 if __name__=='__main__':
     main()
+
 
