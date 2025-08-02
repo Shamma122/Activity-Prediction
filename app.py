@@ -1,5 +1,4 @@
-%%writefile app.py
-print("This is my app")
+
 
 
 import streamlit as st
@@ -48,6 +47,7 @@ def main():
 
 if __name__=='__main__':
     main()
+
 
 
 
