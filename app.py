@@ -1,54 +1,54 @@
-
-
-
 import streamlit as st
 import numpy as np
 import pandas as pd
 import joblib
 
-with open('final_model.joblib','rb') as file:
+# Load your trained model
+with open('final_model.joblib', 'rb') as file:
     model = joblib.load(file)
 
+# Prediction function
 def prediction(inp_list):
-
-    pred = model.predict([inp_list])[0]
-    if pred==0:
-        return 'Sitting on bed'
-    elif pred==1:
-        return 'Sitting on chair'
-    elif pred==2:
-        return 'Lying on bed'
-    else:
-        return 'Ambulating'
+    try:
+        # Ensure input is numeric
+        inp_array = np.array(inp_list).reshape(1, -1)
+        pred = model.predict(inp_array)[0]
         
-        
+        if pred == 0:
+            return 'Sitting on bed'
+        elif pred == 1:
+            return 'Sitting on chair'
+        elif pred == 2:
+            return 'Lying on bed'
+        else:
+            return 'Ambulating'
+    except Exception as e:
+        return f"Prediction error: {e}"
 
+# Main Streamlit app
 def main():
-    st.title('ACTIVITY PREDICTION FROM SENSOR DATA')
-    st.subheader('''This application will predict the on going avtivity of the basis of sensor data provided. Fill the respective 
-    fields it will be predicted.''')
-    st.image('sensors.png')
+    st.title('🛏️ ACTIVITY PREDICTION FROM SENSOR DATA')
+    st.subheader('This app predicts ongoing activity based on sensor data input.')
 
-    rfid = st.selectbox('Enter the RFID configuration settings',['Config 1 (4 Sensors)','Config 2 (3 Sensors)'])
-    rfid_e = (lambda x: 3 if x=='Config 2 (3 Sensors)' else 4)(rfid)
+    st.image('sensors.png', caption='Sensor Setup Example', use_column_width=True)
 
-    ant_ID = st.selectbox('Select the Antena ID',[1,2,3,4])
-    rssi = st.text_input('Enter the received signal strength indicator (RSSI)')
-    accv = st.text_input('Enter the vertical acceleration data from sensor')
-    accf = st.text_input('Enter the frontal acceleration data from sensor')
-    accl = st.text_input('Enter the lateral acceleration data from sensor')
+    rfid = st.selectbox('Enter the RFID configuration setting', ['Config 1 (4 Sensors)', 'Config 2 (3 Sensors)'])
+    rfid_e = 3 if rfid == 'Config 2 (3 Sensors)' else 4
 
-    inp_data = [accf,accv,accl,ant_ID,rssi,rfid_e]
-
-    if st.button('Predict'):
-        response = prediction(inp_data)
-        st.success(response)
+    ant_ID = st.selectbox('Select the Antenna ID', [1, 2, 3, 4])
     
+    # Use number_input to ensure numeric types
+    rssi = st.number_input('Enter RSSI (Received Signal Strength Indicator)', format="%.2f")
+    accv = st.number_input('Enter vertical acceleration (accV)', format="%.2f")
+    accf = st.number_input('Enter frontal acceleration (accF)', format="%.2f")
+    accl = st.number_input('Enter lateral acceleration (accL)', format="%.2f")
 
-if __name__=='__main__':
+    # Build numeric input list
+    inp_data = [accf, accv, accl, ant_ID, rssi, rfid_e]
+
+    if st.button('🔍 Predict'):
+        response = prediction(inp_data)
+        st.success(f"Predicted Activity: {response}")
+
+if __name__ == '__main__':
     main()
-
-
-
-
-
