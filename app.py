@@ -44,14 +44,7 @@ def main():
     accl = st.number_input('Enter lateral acceleration (accL)', format="%.2f")
 
     # Build numeric input list
-   inp_data =  [
-    float(accf),       # Acc_f
-    float(accv),       # Acc_v
-    float(accl),       # Acc_l
-    int(ant_ID),       # Antenna_ID
-    float(rssi),       # rssi
-    int(rfid_e)        # RFID
- ]
+   inp_data =  [ float(accf), float(accv), float(accl), int(ant_ID),float(rssi), int(rfid_e)]
 
     if st.button('🔍 Predict'):
         response = prediction(inp_data)
@@ -59,6 +52,7 @@ def main():
 
 if __name__ == '__main__':
     main()
+
 
 
 
