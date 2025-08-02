@@ -51,7 +51,7 @@ def main():
     int(ant_ID),       # Antenna_ID
     float(rssi),       # rssi
     int(rfid_e)        # RFID
-]
+    ]
 
     if st.button('🔍 Predict'):
         response = prediction(inp_data)
@@ -59,4 +59,5 @@ def main():
 
 if __name__ == '__main__':
     main()
+
 
